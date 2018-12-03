@@ -1,0 +1,16 @@
+For the smartphone app, we decided to represent the values in two different kind of representation, istogram and tart charts.
+I think that the istogram should visualize the data within a 15 day timestamp and the tart chart as the max value registered in that very 15 days(or something else that's related to time)
+IMHO, the main focus of the smartphone app is to give athe user more practical data but not as in detail as for the techical users.
+Let's say a random person is watching the PUBLIC Interface of the app, we have different possibilities:
+1) The PUBLIC interface will show only the variables of the particular day in which the user will be watching it, and let the more interested users see the storage of the information on the smartphone app, maybe through notification with NFC Beacon?(to make Pitta smile)
+2) We can let the user decide which day to visualize a certain day within a certain timespan(from 15 to 30 days) and then the data will get downloaded each time by the smartphone.
+So the users come near the station, select a date, watch the results on public interface, open the smartphone app and automatically the app through NFC will print out the particular data on screen.
+Maybe even the reverse situation is possible, this should be discussed.
+I also added some screenshots about app regarding air pollution and weather variables to have a general idea about the sketches.
+The most valuable example I found is in the app AirVisual, but i found an interesting chart for comfrontation of data in two different points in time in Today Weather App.
+I even put a map in those screenshots but I don't think it's needed, because our smartphone app is connected and receives data from the nearest station (if it's close enough) and doesen0t have a clue about other station.
+About the general mobile skeleton, we can do it like this:
+If we don't want to have an initial page with all the variable at stake, we can use the same idea we were using with the apple watch, reversed, i.e.:
+-When the app is opened it will display the CO2 page first (which in my opinion is the most critical and important data), if we do a vertical scroll(so we stay in the same page) we will display more details on the CO2, when we perform a orizontal scroll a different variable will be displayed(Maybe weather or wind direction).
+We could let the public interface NOT visualize any litteral data exept maybe the temperature and the wind direction with little icons, so that the users are more prone to download the smartphone app.
+
