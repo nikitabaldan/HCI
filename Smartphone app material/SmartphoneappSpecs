@@ -52,7 +52,7 @@ HISTOGRAM CHART
 It's used to have a clear view of the behaviour of that particular variable in a certain timespan(can go from hours to days, can't say for sure what will be the most useful at the moment).
 Of course data like pressure which is not subjected to clear changes and useless data like time or season will not be visualized
 
-LINE CHART
+Line chart
 It will be visualized with the Histogram chart.
 This confronts the different lectures of that particular variable in the SAME exact moment but in different days(Let's say that i open the app at 2:30 PM, this will show the last lectures (which are periodic).If i wanna confront these same lectures with other stations
 and have a days timespan, I have to take the lectures of the exact same lecture but done the day before).
