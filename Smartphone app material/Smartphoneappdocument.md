@@ -1,5 +1,18 @@
+# Smartphone App Requirements
+
+The smartphone app we were going to design must fulfill some requisites:
+	1) Summarize all the information in an easy-to-use tool.
+	2) Provide readable data about the behavior of a certain variable in time.
+	3) Allow the most curios users to confront data between the/some stations.
+
+Build such a thing is not an easy task, given that the space is small and so you have to optimize it, to display in the best quality possible those data that the users
+expect to see. 
+
+
 # Projects already implemented
-In this part we discuss about projects that are already implemented and available.  
+The first step before even thinking about the app design was research.
+We looked for similar apps and research papers/articles/anything that could be useful to our project. 
+As for the mobile apps, we found some pretty inspiring examples.
 We will focus on Mobile Apps, Desktop applications and ambient display that we can use and analyze.
 
 ## Mobile Apps
@@ -27,7 +40,11 @@ Another feature of the application is to show the map of our surroundings, linki
 
 ![](./Screenshots/Graphicinrespecttotime.jpeg "main") 
 
-REQUIREMENTS SMARTPHONE APP
+REASONING ON THE DATASET
+
+
+APP GENERAL DESING
+
 The user can visualize the data in more detail respect to the public interface.
 This is useful to confront singles variables with respect to the nearest station with a map, or to a have a quick history of variables in time.
 If the smartphone reach the range of the beacon nfc proper to all station, a notification will be sent to the smartphone, advising the user of the approach to the station and if the critical variables are dangerously high or not(with respect to mean), changing the default station we want to visualize into that particular one.
@@ -38,22 +55,16 @@ At the opening of the app, three things can happen
     2) The user is near a station, presses the notification, the app will open up and the air condition activity of that particular  will open up
     3) The user is near a station, opens the app in the standard way and a popup will show up(You are near to "Alfa ecostation", connect to it?).
 
-There will be three main pages, the Location activity, the air condition activity and the Weather activity
-In the actual Weather activity we want to visualize
--Time(Hour/Season)
--Pressure
--Luminosity
--Rain
--Temperature
--Wind speed and direction
-Air condition activity
--CO2 ppm
--Air humidity
-In the location one
--Location Name and station name 
--Location height(level from the sea)
--location type of terrain
--location surronding enviroment
+When a station is selected, the general display of that station will be visualized, that contains:
+-Station name
+-Time and season
+-Weather around that particular station
+-Type of soil and enviroment
+-Height in maslm
+
+If the user presses 
+
+
 
 We use a lot of Icon representation for simplify the variables and how the user can immediately guess the meaning of all the data.
 The charts we are going to use in the smartphone apps are:
