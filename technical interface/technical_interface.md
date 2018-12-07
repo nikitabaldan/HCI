@@ -9,9 +9,9 @@ In this section we have a detailed overview about the various representation tec
 we have this division:
 - display one variable
     - Line Chart
+    - violin plot
 
 - compare multiples variables
-    - Scatter chart
     - Radar graph
     - Bubble map
     - Scatterplot Matrix
