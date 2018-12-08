@@ -1,12 +1,14 @@
-# Smartphone App Requirements
+# Personal Interface Requirements
 
+We define here the requirements for the personal interfaces we decided to implement.
 The smartphone app we were going to design must fulfill some requisites:
 	1) Summarize all the information in an easy-to-use tool.
 	2) Provide readable data about the behavior of a certain variable in time.
 	3) Allow the most curios users to confront data between the/some stations.
 
 Build such a thing is not an easy task, given that the space is small and so you have to optimize it, to display in the best quality possible those data that the users
-expect to see. 
+expect to see.
+The smartwatch app cannot be as full of details as the smatphone's, given the more restricted space, it will only visualize the last measurements an a brief daily history-
 
 
 # Projects already implemented
@@ -38,12 +40,35 @@ Swiping down we can see a more detailed view about the air quality in the select
 
 Another feature of the application is to show the map of our surroundings, linking the data about the air quality to the cities near you.
 
-![](./Screenshots/Graphicinrespecttotime.jpeg "main") 
+![](./Screenshots/Graphicinrespecttotime.jpeg "main")
+
+#Smartwatch app resources 
+Papers 
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5038811/
+ 
 
 REASONING ON THE DATASET
+Given the variables the station is measuring and what has to be shown through the interfaces, we have defined a simple hierarchy of the information.
+We decided to divide them in two groups:
+VARIABLES strongly dependent on location, and immutable/less important data
+-Weather(and Pressure)
+-Hour, season
+-Wind direction
+-Location features
+IMPORTANT variables, more likely to be studied and with some kind of behaviour
+-CO2 ppm
+-Wind speed
+-Luminosity
+-Temperature
+-Umidity
+-Rain
+We started building the interfaces based on this hierarcy, given more details for the most important variables.
+
 
 
 APP GENERAL DESING
+
+#SMARTPHONE
 
 The user can visualize the data in more detail respect to the public interface.
 This is useful to confront singles variables with respect to the nearest station with a map, or to a have a quick history of variables in time.
@@ -101,6 +126,13 @@ This might get out of hand when there are four or more station near by but given
 MAP CHART
 This is just to select the station from which we want to visualize the data from, each station has a cursor that has as id the name of the station.
 
+#SMARTWATCH
+
+For the smartwatch, which is a simple device, we decided not to provide lots of data or difficult plots that might result not clear to the user.
+RADIAL CHART
+We use it to visualize the current variable measurement with respect to a daily/montly/annual max value
+HISTOGRAM CHART
+Is a simple plot that can give a quick view to a short history of the variables, in order to extract possible behaviors of a certain variable
 
 
 
