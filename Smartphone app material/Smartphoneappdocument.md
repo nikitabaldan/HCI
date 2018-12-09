@@ -129,10 +129,16 @@ This is just to select the station from which we want to visualize the data from
 #SMARTWATCH
 
 For the smartwatch, which is a simple device, we decided not to provide lots of data or difficult plots that might result not clear to the user.
+We represent only the most important variables, with a little overview of the location of the station, which is represented with a Modular Large Complication.
+The navigation of the app will be a PAGE-BASED one, with a total of 7 pages (one for each important variable + 1 for station overview).
+The user can swipe through the pages, and in a page representing a variable, a double tap on the radar chart can change the type of data representation the page will visualize.
+
+We use only two simple types of charts, given the restricted view of the device.
 RADIAL CHART
 We use it to visualize the current variable measurement with respect to a daily/montly/annual max value
 HISTOGRAM CHART
 Is a simple plot that can give a quick view to a short history of the variables, in order to extract possible behaviors of a certain variable
+
 
 
 
