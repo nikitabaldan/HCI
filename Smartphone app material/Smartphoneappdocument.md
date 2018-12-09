@@ -30,7 +30,7 @@ We found this summary very helpful to have a quick glance on the situation of th
 This is the main interface of AirVisual, as we can see the first thing that we notice is the summary of the air quality in a specific city.  
 The specific parameters are hidden for now to give allow the user to "zoom out" on the air quality in a city.  
 
-in our application we thought about implementig an istogram to visualize the data within a 15 window and the max value registered in those 15 days.
+in our application we thought about implementig an histogram to visualize the data within a time window and the max value registered in a year.
 
 ![](./Screenshots/AirVisual2.jpeg "main")
 
@@ -41,6 +41,8 @@ Swiping down we can see a more detailed view about the air quality in the select
 Another feature of the application is to show the map of our surroundings, linking the data about the air quality to the cities near you.
 
 ![](./Screenshots/Graphicinrespecttotime.jpeg "main")
+
+
 
 #Smartwatch app resources 
 Papers 
@@ -65,7 +67,6 @@ IMPORTANT variables, more likely to be studied and with some kind of behaviour
 We started building the interfaces based on this hierarcy, given more details for the most important variables.
 
 
-
 APP GENERAL DESING
 
 #SMARTPHONE
@@ -74,11 +75,11 @@ The user can visualize the data in more detail respect to the public interface.
 This is useful to confront singles variables with respect to the nearest station with a map, or to a have a quick history of variables in time.
 If the smartphone reach the range of the beacon nfc proper to all station, a notification will be sent to the smartphone, advising the user of the approach to the station and if the critical variables are dangerously high or not(with respect to mean), changing the default station we want to visualize into that particular one.
 
-INTERACTION
+USER INTERACTION
 At the opening of the app, three things can happen
     1) The user is not in the proximity of a eco station, so a map will be visualized with the nearest ecostation(1-2 km range) and the user will choose what station visualize
     2) The user is near a station, presses the notification, the app will open up and the air condition activity of that particular  will open up
-    3) The user is near a station, opens the app in the standard way and a popup will show up(You are near to "Alfa ecostation", connect to it?).
+    3) The user is near a station, opens the app in the standard way and a popup will show up(You are near to "Vega ecostation", connect to it?).
 
 When a station is selected, the general display of that station will be visualized, that contains:
 -Station name
@@ -87,10 +88,13 @@ When a station is selected, the general display of that station will be visualiz
 -Type of soil and enviroment
 -Height in maslm
 
-If the user presses 
+If the user presses the data button, the icons of the most important variable will show up, with their current lecture already visible.
+When an icon is pressed, the activity of that certain variable will popup up, in which the user can see how the last lecture approaches the annual max measure of that particular variable, as well as the behaviour of that variable in time(daily, monthly or annualy).
+If the "Comparison" button is pressed, another activity will show up, which presents the comparison of actual lectures of the nearest stations and their behaviour in a week timespan.
+THe user can return to the menu with the left top screen error on the variable-related activity
 
 
-
+DATA REPRESENTATION TECHNIQUES
 We use a lot of Icon representation for simplify the variables and how the user can immediately guess the meaning of all the data.
 The charts we are going to use in the smartphone apps are:
 -Histogram charts
@@ -108,16 +112,16 @@ The histogram chart and Line chart will be visualized after having clicked on th
 with the lecture of the other near station(always 1-2 km in range) and the selected one(confrontation).
 To se the possible relation between different variables the technical application is suggested.
 
-CHARTS
 GAUGE CHART
 The gauge chart is used to give an easy and pretty visualization to the raw data of the variables.
-The max gauge will max value registered by the eco station in history for that parameter(for temperature will be the max related to the season, in order to have a more clear representation of that particular variable)
+The max gauge will max value registered by the eco station in a year timespan for that parameter(for temperature will be the max related to the season, in order to have a more clear representation of that particular variable).
 
 HISTOGRAM CHART
 It's used to have a clear view of the behaviour of that particular variable in a certain timespan(can go from hours to days, can't say for sure what will be the most useful at the moment).
-Of course data like pressure which is not subjected to clear changes and useless data like time or season will not be visualized
+Of course data like pressure which is not subjected to clear changes and useless data like time or season will not be visualized.
+We use it to better present the history of a certain variable and a visible difference between the other station current measures
 
-Line chart
+LINE CHART
 It will be visualized with the Histogram chart.
 This confronts the different lectures of that particular variable in the SAME exact moment but in different days(Let's say that i open the app at 2:30 PM, this will show the last lectures (which are periodic).If i wanna confront these same lectures with other stations
 and have a days timespan, I have to take the lectures of the exact same lecture but done the day before).
@@ -130,14 +134,15 @@ This is just to select the station from which we want to visualize the data from
 
 For the smartwatch, which is a simple device, we decided not to provide lots of data or difficult plots that might result not clear to the user.
 We represent only the most important variables, with a little overview of the location of the station, which is represented with a Modular Large Complication.
-The navigation of the app will be a PAGE-BASED one, with a total of 7 pages (one for each important variable + 1 for station overview).
+The navigation of the app will be a page-based one, with a total of 7 pages (one for each important variable + 1 for station overview).
 The user can swipe through the pages, and in a page representing a variable, a double tap on the radar chart can change the type of data representation the page will visualize.
 
 We use only two simple types of charts, given the restricted view of the device.
 RADIAL CHART
 We use it to visualize the current variable measurement with respect to a daily/montly/annual max value
 HISTOGRAM CHART
-Is a simple plot that can give a quick view to a short history of the variables, in order to extract possible behaviors of a certain variable
+Is a simple plot that can give a quick view to a short history of the variables, in order to extract possible behaviors of a certain variable.
+
 
 
 
