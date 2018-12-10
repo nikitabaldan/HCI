@@ -297,51 +297,73 @@ The system is divided in the following parts:
 \end{itemize}
 It has been chosen the following type of representation: 
 \begin{itemize}
-\item Scatter chart
-\item Colored intensity map
-\item Trend line
-\item Point representation with mean
 \item Radar chart
+\item Scatter chart
+\item Bubble Chart
+\item Line Chart
+\item Violin Diagram
 \end{itemize}
-The following mockup represent the system that will be used by technicians.\\
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=1\textwidth]{img/tot.png}
-  \caption{Technical interface}
-  \label{fig:boat1}
-\end{figure}
+The technical application will be used by academic and technician to visualize and manipulate data in a more detailed way. The first screen that we are going to see in the technical app is the \textit{login screen} needed to authenticate the users with the permissions to visualize the data. After the authentication we have two ways to display data, we can retrive the data of a singular station or we can compare datas between two stations. If we choose to display the data of a singolar station we will have a radar chart with every parameter registered from a station and, clicking on a specific one, we will be redirected to the various charts regarding that parameter with the possibility to compare it with the same parameter from another station.      
+
 \subsection{Type of graphs}
-It has been chosen those type of representation because they represent accurately the raw data. The exceptions are the radar chart, it has been chosen because it sum up all the variables(the values goes from 0 to 10, which represent the quality of that variable); and the colored intensity map which represent the situation in that moment on the map. 
+It has been chosen those type of representation because they represent accurately the raw data. The exceptions are the radar chart, it has been chosen because it sum up all the variables(the values goes from 0 to 10, which represent the quality of that variable); and the Bubble map which represent the situation in that moment on the map. 
+
+\subsubsection{Radar Chart}
+The radar graph is a graphic method to represent set of datas consisting of multiple variables, representing them on axis with the same origin.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{img/scatter_chart.png}
-  \caption{Scatter chart}
-  \label{fig:boat1}
+  \includegraphics[width=0.7\textwidth]{img/radarChart.png}
+  \caption{Radar chart}
+  \label{fig:rdrChart}
 \end{figure}
+This chart is used in our project to quickly check the optimality of the various parameters of a given building in the moment of the visualization.
+with this tool we will be able to know which are the worst/best parameters with a glance and use this information to pick the right countermeasures.
+
+\subsubsection{Line Chart}
+The line chart is a chart which displays a series of data points called "markers" connected by straight line segments.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{img/trend_line.png}
-  \caption{Trend line}
-  \label{fig:boat1}
+  \includegraphics[width=0.9\textwidth]{img/lineChart.png}
+  \caption{Line Chart}
+  \label{fig:lnChart}
 \end{figure}
+We use this type of representation in our technical interface to display a single data over time, allowing us to appreciate its mutations in a certain period.
+
+\subsubsection{Bubble Map}
+In this chart we have colored circles on a geographic map. The color and dimension of the bubbles are in relation with the data.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{img/point.png}
-  \caption{Scatter Point representation with mean line}
-  \label{fig:boat1}
+  \includegraphics[width=0.6\textwidth]{img/bubbleMap.png}
+  \caption{Bubble Map}
+  \label{fig:bublMap}
 \end{figure}
+in our representation the red colour of the bubbles indicates bad parameters for the station while the smaller green ones indicate positive parameters.
+
+\subsubsection{Scatterplot}
+Scatterplot shows relation between two variables using Cartesian Coordinates.
+In each axis is displayed a variable allowing us to find if between those variables there exists a relation
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{img/dont_know.png}
-  \caption{Radar graph}
-  \label{fig:boat1}
+  \includegraphics[width=0.9\textwidth]{img/scatter_chart.png}
+  \caption{Scatterplot}
+  \label{fig:scttrPlot}
 \end{figure}
+In our case we can see if we have a relation between the variables we choose (CO2 ppm and temperature).
+
+\newpage
+\subsubsection{Violin plot}
+A violin plot is a method of plotting numeric data. It is similar to a box plot but it is composeb by four layers: The outer shape represents all possible results, with thickness indicating how common. The next layer inside represents the values that occur 95 percent of the time. The next layer (if it exists) inside represents the values that occur 50 percent of the time. The central dot represents the median average value. 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{img/lol.png}
-  \caption{Colored intensity map}
-  \label{fig:boat1}
+  \includegraphics[width=0.9\textwidth]{img/violinChart.png}
+  \caption{Scatterplot}
+  \label{fig:scttrPlot}
 \end{figure}
+
+
+
+
+
 
 \newpage
 %----------------------------------------------------------------------------------------
