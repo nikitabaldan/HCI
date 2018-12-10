@@ -75,6 +75,55 @@ The station will collect the following environmental data:
 \item Pressure
 \item Rain
 \item Temperature
+\section{Competitive analisys}
+\subsection{Personal interface}
+Before we could actualy start the design, a little research on the argument had to be done, about the data representation techniques which could be used with the data we have to visualize and some examples of application which dealed with something similar.
+
+We found some good examples and took some hints.
+\subsubsection{Air visual}
+This was a good app to start the competitive analysis, because it was the most complete and the prettiest.
+We deduced from this app we can organize the general look of the application as a n card view, and there was some historic data management we found vey interesting.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=4cm,height=10cm,keepaspectratio]{img/AirVisual1.jpeg}
+  \hspace{0.1\textwidth}
+  \includegraphics[width=4cm,height=10cm,keepaspectratio]{img/AirVisual2.jpeg}
+  \hfill
+  \caption{As we can see, the left most img has a 2-card design(My places/My devices), while the right most
+  has a daily/hourly historic data.}
+  \label{fig:boat4}
+\end{figure}
+
+
+\subsubsection{Air Quality:Real Time AQI}
+From this app, we found really interesting the data visualization through histogram diagram and they visualize the data in a certain timespan.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=4cm,height=10cm,keepaspectratio]{img/apphistogram.jpeg}
+  \caption{Airquality histograms}
+  \label{fig:boat3}
+\end{figure}
+
+\subsection{Technical Interface}
+For the technical we searched for desktop online application and sites which treated the same kind of data(meteorologic, air pollution).
+
+\subsubsection{acqin.org}
+The site displays a large map with colored indicators that indicate the quality of the air in zone where the centers are placed. The use of colours permits a good comparison among the various centers.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=25cm,height=10cm,keepaspectratio]{img/aqicn.png}
+  \caption{acqin.org Labeled mapchart with the index of air pollution(the more polluted, the more the label is coloured red)}
+  \label{fig:boat3}
+\end{figure}
+\subsubsection{waqi.org}
+In this second app we have more types of data representation than before. We have a close-up on a specific location with the data relative to it represented in various formats!
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm,height=10cm,keepaspectratio]{img/TechnicalExample.png}
+  \caption{waqi.org in a example postion, which enhance the quality and quantity of data displayed}
+  \label{fig:boat3}
+\end{figure}
+
 \end{itemize} 
 \section{Proposal}
 The solution provided will present the following representation. 
