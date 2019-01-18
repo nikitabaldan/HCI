@@ -348,77 +348,131 @@ This give a detailed view of the surrounding in a short amount of time.
 \end{itemize}
 \newpage
 \subsection{Technical}
-INVISION link: https://invis.io/3WPJB0OEYAP.
-This type of representation is for people that analyze the row data, so it has been chosen to use representations that maybe are less intuitive to understand but are more accurate. \\ It has also been introduced the comparison, which allows to select the type of data to compare, and compare it.
+OUR INITIAL MOCKUP INVISION link: https://invis.io/3WPJB0OEYAP.
+This type of representation is for people that analyze the row data, so it has been chosen to use representations that maybe are less intuitive to understand but are more accurate. 
+ It has also been introduced the comparison, which allows to select the type of data to compare, and compare it.
 The system is divided in the following parts: 
 \begin{itemize}
 \item Login
-\item Representation
-\item Choice of what compare  
+\item Choice of the station
+\item Overview and data representation of a single station  
 \item Comparison
 \end{itemize}
 It has been chosen the following type of representation: 
 \begin{itemize}
+\item Weather Map
 \item Radar chart
-\item Scatter chart
-\item Bubble Chart
-\item Line Chart
-\item Violin Diagram
+\item Line chart
+\item Violin Plot
+\item Scatterplot Matrix
+\item Bar Chart
+\item Parallel Plot
 \end{itemize}
-The technical application will be used by academic and technician to visualize and manipulate data in a more detailed way. The first screen that we are going to see in the technical app is the \textit{login screen} needed to authenticate the users with the permissions to visualize the data. After the authentication we have two ways to display data, we can retrive the data of a singular station or we can compare datas between two stations. If we choose to display the data of a singolar station we will have a radar chart with every parameter registered from a station and, clicking on a specific one, we will be redirected to the various charts regarding that parameter with the possibility to compare it with the same parameter from another station.      
+\subsection{User Interaction}
+The technical application will be used by academic and technician to visualize and manipulate data in a more detailed way. The first screen that we are going to see in the technical app is the \textit{login screen} needed to authenticate the users with the permissions to visualize the data.
+After the authentication we will have to select the station we want to display.
+The overview of the selected station will then open up, with a comfortable menu on the left side with:
+\begin{itemize}
+	\item \textbf{Overview}, which summarize the overall situation in the current station.
+	\item \textbf{Single station charts} with a lot of useful data representation, in order to better inspect the situation in the selected station
+	\item \textbf{Comparision charts}, which permits to compare data between different stations
+	\item \textbf{Change station} that lets the user change the focus on another station 
+\end{itemize}
+We used a fake user called Giuseppe Rossi with password 'admin', but even empty values will let you enter.
+The only station we actually introduced are Serina and Porto Marghera, the other ones are placed only as mock data.
+We have introduced some functionality in order to show how the complete and full working site will look like.
+In any time, clicking on the name of the web application, the user can go back to the beginning(the choice of the station)
+
+\subsubsection{Single station charts}
+Here the user can look at the charts we decided were optimal to show the historical behaviour and the distribution over a day of the different variables and the possible relations between a subgroup of the  variables.
+
+We handled the selection of the variables with a combobox while the measurements showed in the	\textbf{Scatterplot Matrix} are handled with a series of checkboxes.
+
+\subsubsection{Comparison charts}
+In this section the user selects which station to compare with the checkboxes under every chart, by default the nearest two are automatically selected to be compared.
+The \textbf{Parallel plot} can represent different variables of different stations, so it's layout will be controlled by a series of checkboxes(mocked).
+Every time a station is selected to be compared, its name will show up on the left menu, and under those name the user can return to the overview of one of the nearest three stations.     
 
 \subsection{Type of graphs}
-It has been chosen those type of representation because they represent accurately the raw data. The exceptions are the radar chart, it has been chosen because it sum up all the variables(the values goes from 0 to 10, which represent the quality of that variable); and the Bubble map which represent the situation in that moment on the map. 
+It has been chosen those type of representation because they represent accurately the raw data. The exceptions are the radar chart, it has been chosen because it sum up all the variables(the values goes from 0 to 10, which represent the quality of that variable); and the Bubble map which represent the situation in that moment on the map.
+
+\subsubsection{Weather Map}
+We use this to put on a geographical view all the station, the user will select the particular station he wants to inspect the measurements
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{img/WeatherMap.png}
+  \caption{WeatherMap}
+  \label{fig:rdrChart}
+\end{figure}
+
+\newpage
 
 \subsubsection{Radar Chart}
 The radar graph is a graphic method to represent set of datas consisting of multiple variables, representing them on axis with the same origin.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{img/radarChart.png}
+  \includegraphics[width=0.7\textwidth]{img/RadarChart.png}
   \caption{Radar chart}
   \label{fig:rdrChart}
 \end{figure}
 This chart is used in our project to quickly check the optimality of the various parameters of a given building in the moment of the visualization.
 with this tool we will be able to know which are the worst/best parameters with a glance and use this information to pick the right countermeasures.
 
+\newpage
+
 \subsubsection{Line Chart}
 The line chart is a chart which displays a series of data points called "markers" connected by straight line segments.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{img/lineChart.png}
+  \includegraphics[width=0.9\textwidth]{img/LineChart.png}
   \caption{Line Chart}
   \label{fig:lnChart}
 \end{figure}
-We use this type of representation in our technical interface to display a single data over time, allowing us to appreciate its mutations in a certain period.
-
-\subsubsection{Bubble Map}
-In this chart we have colored circles on a geographic map. The color and dimension of the bubbles are in relation with the data.
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{img/bubbleMap.png}
-  \caption{Bubble Map}
-  \label{fig:bublMap}
-\end{figure}
-in our representation the red colour of the bubbles indicates bad parameters for the station while the smaller green ones indicate positive parameters.
-
-\subsubsection{Scatterplot}
-Scatterplot shows relation between two variables using Cartesian Coordinates.
-In each axis is displayed a variable allowing us to find if between those variables there exists a relation
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.9\textwidth]{img/scatterplot.png}
-  \caption{Scatterplot}
-  \label{fig:scttrPlot}
-\end{figure}
-In our case we can see if we have a relation between the variables we choose (CO2 ppm and temperature).
+We use this type of representation in our technical interface to display a single data over time, allowing us to appreciate its mutations in a certain period(daily, montly or yearly).
 
 \newpage
+
 \subsubsection{Violin plot}
-A violin plot is a method of plotting numeric data. It is similar to a box plot but it is composeb by four layers: The outer shape represents all possible results, with thickness indicating how common. The next layer inside represents the values that occur 95 percent of the time. The next layer (if it exists) inside represents the values that occur 50 percent of the time. The central dot represents the median average value. 
+A violin plot is a method of plotting numeric data. It is similar to a box plot but it is composed by four layers: The outer shape represents all possible results, with thickness indicating how common. The next layer inside represents the values that occur 95 percent of the time. The next layer (if it exists) inside represents the values that occur 50 percent of the time. The central dot represents the median average value. 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{img/violinChart.png}
-  \caption{Scatterplot}
+  \includegraphics[width=0.9\textwidth]{img/ViolinChart.png}
+  \caption{Violin Chart}
+  \label{fig:scttrPlot}
+\end{figure}
+
+\newpage
+\subsubsection{Scatterplot Matrix}
+Scatterplot matrix is a particular type of graphs which combines different Scatterplot.
+We use it to compare different variables of a single station, in order to discover relations between some enviromental specs
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/ScatterplotMatrix.png}
+  \caption{Scatterplot Matrix}
+  \label{fig:scttrPlot}
+\end{figure}
+In our case we select with a series of checkbox which variable to display.
+\newpage
+\subsubsection{Bar chart}
+The bar chart is used in the comparision between different station, for the last measurements of a particular variable.
+This will give us a first hint on possible patterns, compare for example the different concentration of CO2 between an industrial area and a near mountain enviroment, or maybe the different level of humidity between two different type of soil.
+We can choose which of the variables we want to show up.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/BarChart.png}
+  \caption{Bar Chart}
+  \label{fig:scttrPlot}
+\end{figure} 
+
+\newpage
+
+\subsubsection{Parallel Plot}
+We used this particular graph in order to show possible hidden relations between other station measurements of the variables.
+The closer the station are between them, the data might be influenced by the same enviromental condition, and might have some relation with one another, between station not so close there might be some relation of atmosferical and weather variables(maybe low-pressure conditions or perturbation).
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/ParallelPlot.png}
+  \caption{Parallel Plot}
   \label{fig:scttrPlot}
 \end{figure}
 
