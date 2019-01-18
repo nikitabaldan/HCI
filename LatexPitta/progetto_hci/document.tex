@@ -264,7 +264,7 @@ The navigation of the app will be a \textit{Page-Based one}, with a total of 7 p
 Like the smartphone, a notification in case a particular station is in range would be received by the smartwatch.
 
 At the open of the app, a \textbf{Action Sheet} will pop up, letting the user choose over the different stations.After having choose a station, the app will open up like in Figure 7.
-The choosing of a station will be triggered if the general info of the station will be tapped.
+In any time, by pressing the \textbf{Back} button, the user can go back to the initial screen and can select another station.
 
 \begin{figure}[H]
  \centering
@@ -370,6 +370,7 @@ It has been chosen the following type of representation:
 \end{itemize}
 \subsection{User Interaction}
 The technical application will be used by academic and technician to visualize and manipulate data in a more detailed way. The first screen that we are going to see in the technical app is the \textit{login screen} needed to authenticate the users with the permissions to visualize the data.
+
 After the authentication we will have to select the station we want to display(In our example every station selected brings you to Porto Marghera station).
 The overview of the selected station will then open up, with a comfortable menu on the left side with:
 \begin{itemize}
@@ -381,8 +382,12 @@ The overview of the selected station will then open up, with a comfortable menu 
 We used a fake user called Giuseppe Rossi with password 'admin', but even empty values will let you enter.
 The only station we actually introduced are Serina and Porto Marghera, the other ones are placed only as mock data.
 The user can change station(only between Porto Marghera and Serina) by pressing the \textbf{Change Station} label.
+
 We have introduced some functionality in order to show how the complete and full working site will look like.
 In any time, clicking on the name of the web application, the user can go back to the beginning(the choice of the station).
+Many charts we used are interactive, that means that on action like mouse over the user will be show additional information for the data represented on the plot.
+
+For example, if we select some elements they are highlighted, while in some chart like the violin, bar and line chart selecting a particular subset of measures the plot will be zoomed, a double click will remove the zoom.
 
 \subsubsection{Single station charts}
 Here the user can look at the charts we decided were optimal to show the historical behaviour and the distribution over a day of the different variables and the possible relations between a subgroup of the  variables.
