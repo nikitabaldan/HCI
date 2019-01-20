@@ -1,0 +1,3486 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://web.telegram.org/#/im?p=@emanuele232 -->
+<html lang="en" manifest="webogram.appcache" ng-csp="" xmlns:ng="http://angularjs.org" id="ng-app" style="display: block;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><title>Telegram Web</title><link rel="stylesheet" href="./Telegram Web_files/app.css"><link rel="manifest" href="https://web.telegram.org/manifest.webapp.json"><link rel="shortcut icon" type="image/x-icon" href="https://web.telegram.org/favicon.ico"><link rel="apple-touch-icon" href="https://web.telegram.org/img/iphone_home120.png"><link rel="apple-touch-icon" sizes="120x120" href="https://web.telegram.org/img/iphone_home120.png"><link rel="apple-touch-startup-image" media="(device-width: 320px)" href="https://web.telegram.org/img/iphone_startup.png"><meta name="apple-mobile-web-app-title" content="Telegram Web"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#497495"><meta name="google" content="notranslate"><meta property="og:title" content="Telegram Web"><meta property="og:url" content="https://web.telegram.org/"><meta property="og:image" content="https://web.telegram.org/img/logo_share.png"><meta property="og:site_name" content="Telegram Web"><meta property="description" content="Welcome to the Web application of Telegram messenger. See https://github.com/zhukov/webogram for more info."><meta property="og:description" content="Welcome to the Web application of Telegram messenger. See https://github.com/zhukov/webogram for more info."><link rel="stylesheet" href="./Telegram Web_files/desktop.css"><style type="text/css">ogvjs { display: inline-block; position: relative; -webkit-user-select: none; -webkit-tap-highlight-color: rgba(0,0,0,0); </style></head><body class="non_osx non_msie is_1x"><!----><div class="page_wrap" ng-view=""><div my-head=""><div class="tg_page_head tg_head_wrap noselect clearfix">
+  <div class="tg_head_split">
+
+    <div class="tg_head_logo_wrap">
+      <div class="tg_head_logo_dropdown dropdown" dropdown="">
+        <a class="tg_head_btn dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+          <div class="icon-hamburger-wrap">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </div><i class="icon icon-tg-title"></i>
+        </a>
+
+        <ul class="dropdown-menu">
+          <li><a ng-click="openGroup()">
+            <i class="icon icon-new-group"></i><span my-i18n="im_new_group">Nuovo gruppo</span>
+          </a></li>
+          <!----><li ng-if="!isEmpty.contacts"><a ng-click="openContacts()">
+            <i class="icon icon-contacts"></i><span my-i18n="im_contacts">Contatti</span>
+          </a></li><!---->
+          <li><a ng-click="openSettings()">
+            <i class="icon icon-settings"></i><span my-i18n="im_settings">Impostazioni</span>
+          </a></li>
+          <li><a ng-click="openFaq()">
+            <i class="icon icon-faq"></i><span my-i18n="head_telegram_faq">Domande frequenti</span>
+          </a></li>
+          <li><a href="https://web.telegram.org/" ng-click="openChangelog()">
+            <i class="icon icon-about"></i><span my-i18n="head_about">Info</span>
+          </a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tg_head_main_wrap" ng-switch="offline">
+      <!---->
+
+      <!----><!----><div ng-switch-default="" ng-if="!!historyPeer.id" class="tg_head_main_peer_wrap" style="">
+
+        <div class="tg_head_peer_dropdown tg_head_peer_media_dropdown dropdown" dropdown="">
+          <a class="tg_head_btn dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a ng-click="toggleEdit()" my-i18n="head_select_messages">Seleziona messaggi</a></li>
+            <li class="divider ng-scope"></li>
+            <li><a ng-click="toggleMedia(&#39;photos&#39;)" my-i18n="head_media_photos">Foto</a></li>
+            <li><a ng-click="toggleMedia(&#39;video&#39;)" my-i18n="head_media_video">Video</a></li>
+            <li><a ng-click="toggleMedia(&#39;documents&#39;)" my-i18n="head_media_documents">File</a></li>
+            <li><a ng-click="toggleMedia(&#39;music&#39;)" my-i18n="head_media_music">Audio</a></li>
+            <li><a ng-click="toggleMedia(&#39;urls&#39;)" my-i18n="head_media_links">Link condivisi</a></li>
+            <li><a ng-click="toggleMedia(&#39;audio&#39;)" my-i18n="head_media_audio">Messaggi vocali</a></li>
+            <li><a ng-click="toggleMedia(&#39;round&#39;)" my-i18n="head_media_round">Videomessaggi</a></li>
+            <!---->
+            <!---->
+          </ul>
+        </div>
+
+        <a class="tg_head_btn tg_head_peer_search_btn" ng-click="toggleMedia(&#39;search&#39;)">
+          <i class="icon icon-search"></i>
+        </a>
+
+        <a class="tg_head_btn tg_head_peer_return_btn ng-hide" ng-show="historyFilter.mediaType.length || historyState.skipped" ng-click="returnToRecent()" ng-switch="historyState.skipped">
+          <!---->
+          <!----><span ng-switch-default="" my-i18n="im_show_all_messages">Mostra tutti i messaggi</span><!---->
+          <strong class="tg_head_peer_return_count ng-hide" ng-show="historyState.missedCount &gt; 0" ng-bind="&#39;+&#39; + historyState.missedCount">+0</strong>
+        </a>
+
+        <div class="tg_head_peer_title_wrap" ng-switch="historyFilter.mediaType">
+          <!---->
+          <!---->
+          <!---->
+          <!---->
+          <!---->
+          <!---->
+          <!---->
+          <!---->
+
+          <!----><a class="tg_head_btn" ng-switch-default="" ng-click="showPeerInfo()">
+            <div class="tg_head_peer_info">
+              <span class="tg_head_peer_title" my-peer-link="historyPeer.id" peer-watch="true" dir="auto" for-dialog="true">M8</span>
+              <span class="tg_head_peer_status" ng-switch="historyPeer.id &gt; 0">
+                <!----><span ng-switch-when="true" my-user-status="historyPeer.id" for-dialog="true">ultimo accesso 9 ore fa</span><!---->
+                <!---->
+              </span>
+            </div>
+          </a><!---->
+
+        </div>
+
+      </div><!----><!---->
+    </div>
+  </div>
+</div></div>
+
+<div class="im_page_wrap clearfix" ng-class="{im_page_peer_not_selected: !curDialog.peer}" style="">
+
+  <div class="im_page_split clearfix">
+
+    <div class="im_dialogs_col_wrap noselect" ng-controller="AppImDialogsController" my-dialogs="" ng-class="search.query.length &gt; 0 ? &#39;im_dialogs_col_search&#39; : &#39;&#39;">
+      <div class="im_dialogs_panel">
+        <div class="im_dialogs_search">
+          <input class="form-control im_dialogs_search_field no_outline ng-pristine ng-untouched ng-valid ng-empty" type="search" placeholder="Cerca" ng-model="search.query" autocomplete="off">
+          <a class="im_dialogs_search_clear tg_search_clear ng-hide" ng-click="searchClear()" ng-show="search.query.length">
+            <i class="icon icon-search-clear"></i>
+          </a>
+        </div>
+      </div>
+
+      <div my-dialogs-list="" class="im_dialogs_col" style="height: 761px;">
+        <div class="im_dialogs_wrap nano has-scrollbar active-scrollbar">
+          <div class="im_dialogs_scrollable_wrap nano-content" tabindex="-1" style="right: -15px;">
+
+            <!---->
+
+            <ul class="nav nav-pills nav-stacked">
+              <!---->
+              <!----><li class="im_dialog_wrap active" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}" style=""><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">11:17</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/8e69cb48-6d0a-4ef7-bda4-ffc225225473"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">M8</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!----><span class="im_dialog_chat_from_wrap" ng-if="dialogMessage.pFlags.out &amp;&amp; dialogMessage.fromID &gt; 0">
+              <span class="im_dialog_chat_from" my-i18n="conversation_you">Tu</span><!----><span ng-if="dialogMessage.message.length &gt; 0 || !!dialogMessage.media">:</span><!---->
+            </span><!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><span class="im_short_message_media" ng-if="message.media" ng-switch="message.media._">
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+</span><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Ciao Ema, per pittarello ci rimangono solo due cose da fare: 1) SIstemare un attimino i mockup della technical con Moqups per fa</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}" style=""><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">10:47</div>
+    <span class="im_dialog_badge badge im_dialog_badge_muted" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted" style="">1</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/1c2e1c32-4cf8-41c5-8e6b-2f8407f54b4f"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">ULTIM'ORA 24</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">#ULTIMORA Figlia Borsellino:Viminale dia archivio 🗞️ approfondisci</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">10:15</div>
+    <span class="im_dialog_badge badge" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted" style="">1</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/5e376eea-07db-4d66-8350-e838328fc5d8"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Calcetto 24/01</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!---->
+          <!----><span ng-switch-default="">
+            <span class="im_dialog_chat_from_wrap" ng-switch="dialogMessage.pFlags.out &amp;&amp; dialogMessage._ != &#39;messageService&#39;">
+              <!----><span ng-switch-when="false" class="im_dialog_chat_from" my-peer-link="dialogMessage.from_id" short="true" peer-watch="true">Nikita</span><!----><!----><!----><span ng-if="dialogMessage.message.length || dialogMessage.media">:</span><!---->
+            </span>
+          </span><!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Mi pare di si</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">10:15</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/655b7fff-a566-48d3-97ea-12bf32599a80"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Nikita</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!----><span class="im_dialog_chat_from_wrap" ng-if="dialogMessage.pFlags.out &amp;&amp; dialogMessage.fromID &gt; 0">
+              <span class="im_dialog_chat_from" my-i18n="conversation_you">Tu</span><!----><span ng-if="dialogMessage.message.length &gt; 0 || !!dialogMessage.media">:</span><!---->
+            </span><!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Osti arrivo</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">01:57</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/1e9fc47c-b556-470a-afa8-2ed50bbe418f"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">TUTTO INAZUMA FANSUB</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><span class="im_short_message_media" ng-if="message.media" ng-switch="message.media._">
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+</span><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">⁣L'episodio 13 è appena uscito in streaming anche su Openload e su Dailymotion (canale Rikix), entrambe le versioni in HD <span class="emoji  emoji-spritesheet-0" style="background-position: -54px -0px;" title="blush">:blush:</span>  Ec</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">00:36</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/c4088b5b-b3dd-4253-8ac3-350acabb948f"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Probabilmente gruppo sicurezza</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!---->
+          <!----><span ng-switch-default="">
+            <span class="im_dialog_chat_from_wrap" ng-switch="dialogMessage.pFlags.out &amp;&amp; dialogMessage._ != &#39;messageService&#39;">
+              <!----><span ng-switch-when="false" class="im_dialog_chat_from" my-peer-link="dialogMessage.from_id" short="true" peer-watch="true">Nikita</span><!----><!----><!----><span ng-if="dialogMessage.message.length || dialogMessage.media">:</span><!---->
+            </span>
+          </span><!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">È l’ultimo giorno</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">sab</div>
+    <span class="im_dialog_badge badge ng-hide im_dialog_badge_muted" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/980990ea-7222-4205-aa2d-a8aa0e08563a"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Breaking News - ULTIM'ORA</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><span class="im_short_message_media" ng-if="message.media" ng-switch="message.media._">
+  <!----><span ng-switch-when="messageMediaPhoto" my-i18n="conversation_media_photo">Foto</span><!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+</span><!----><!----><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">sab</div>
+    <span class="im_dialog_badge badge ng-hide im_dialog_badge_muted" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><span class="peer_initials nocopy im_dialog_photo user_bgcolor_8" data-content="ma"></span></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Magistrale</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!---->
+          <!----><span ng-switch-default="">
+            <span class="im_dialog_chat_from_wrap" ng-switch="dialogMessage.pFlags.out &amp;&amp; dialogMessage._ != &#39;messageService&#39;">
+              <!----><span ng-switch-when="false" class="im_dialog_chat_from" my-peer-link="dialogMessage.from_id" short="true" peer-watch="true">Alberto</span><!----><!----><!----><span ng-if="dialogMessage.message.length || dialogMessage.media">:</span><!---->
+            </span>
+          </span><!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><span class="im_short_message_media" ng-if="message.media" ng-switch="message.media._">
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+</span><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Ragazzi, è stata pubblicata la graduatoria provvisoria per le borse di studio: https://www.unive.it/pag/fileadmin/user_upload/at</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">sab</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/8af5d739-8fe8-4d84-a9c5-98362d1dfd4c"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Lorenzo Soligo</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">non so come sia, forse si limita a quel parziale, dovresti chiedere a antonio</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">sab</div>
+    <span class="im_dialog_badge badge ng-hide im_dialog_badge_muted" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/539bb258-1dc4-4a83-b327-638c45fecc67"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Informatica Bicocca (Terzo anno 2017/2018)</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!---->
+          <!----><span ng-switch-default="">
+            <span class="im_dialog_chat_from_wrap" ng-switch="dialogMessage.pFlags.out &amp;&amp; dialogMessage._ != &#39;messageService&#39;">
+              <!----><span ng-switch-when="false" class="im_dialog_chat_from" my-peer-link="dialogMessage.from_id" short="true" peer-watch="true">Davide</span><!----><!----><!----><span ng-if="dialogMessage.message.length || dialogMessage.media">:</span><!---->
+            </span>
+          </span><!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Luca Berna top</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}" style=""><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">ven</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><span class="peer_initials nocopy im_dialog_photo user_bgcolor_6" data-content="aa"></span></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Alessandro Appartamento</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!----><span class="im_dialog_chat_from_wrap" ng-if="dialogMessage.pFlags.out &amp;&amp; dialogMessage.fromID &gt; 0">
+              <span class="im_dialog_chat_from" my-i18n="conversation_you">Tu</span><!----><span ng-if="dialogMessage.message.length &gt; 0 || !!dialogMessage.media">:</span><!---->
+            </span><!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><span class="im_short_message_media" ng-if="message.media" ng-switch="message.media._">
+  <!---->
+  <!----><span ng-switch-when="messageMediaDocument" ng-switch="message.media.document.type || false">
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!----><span ng-switch-default="" ng-bind="message.media.document.file_name">YAAA.jpg</span><!---->
+  </span><!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+</span><!----><!----><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">gio</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/48a9c2cb-cbe5-49f4-a535-a11618d7d40b"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Maddalena</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Ok ok allora io aspetto che nikita faccia la visita poi viene verso di qua ci troviamo alla ferrovia a Venezia per le 11.30?</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">lun</div>
+    <span class="im_dialog_badge badge ng-hide im_dialog_badge_muted" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/0bcf513e-8736-45d3-b5ed-8866ef2a9d6d"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">القضيب الكبير باستثناء كارلو</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!---->
+          <!----><span ng-switch-default="">
+            <span class="im_dialog_chat_from_wrap" ng-switch="dialogMessage.pFlags.out &amp;&amp; dialogMessage._ != &#39;messageService&#39;">
+              <!----><!----><span ng-switch-when="true" class="im_dialog_chat_from" my-i18n="conversation_you">Tu</span><!----><!----><span ng-if="dialogMessage.message.length || dialogMessage.media">:</span><!---->
+            </span>
+          </span><!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Io ci metto la faccia</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">29/12/18</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><span class="peer_initials nocopy im_dialog_photo user_bgcolor_3" data-content="lo"></span></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Loris</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><span class="im_short_message_service" ng-if="message._ == &#39;messageService&#39;" ng-switch="message.action._">
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!----><span ng-switch-when="messageActionCustomAction" ng-bind="message.action.message">joined Telegram</span><!---->
+
+
+</span><!----><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">28/12/18</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="./Telegram Web_files/Fave.png"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Messaggi salvati</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><span class="im_short_message_media" ng-if="message.media" ng-switch="message.media._">
+  <!---->
+  <!----><span ng-switch-when="messageMediaDocument" ng-switch="message.media.document.type || false">
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!----><span ng-switch-default="" ng-bind="message.media.document.file_name">Voucher-GYG57689194.pdf</span><!---->
+  </span><!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+</span><!----><!----><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">19/12/18</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><span class="peer_initials nocopy im_dialog_photo user_bgcolor_5" data-content="si"></span></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Silvestri</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Ahahah</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">03/12/18</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><span class="peer_initials nocopy im_dialog_photo user_bgcolor_5" data-content="ys"></span></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Yuriy Synilnyk</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!----><span class="im_dialog_chat_from_wrap" ng-if="dialogMessage.pFlags.out &amp;&amp; dialogMessage.fromID &gt; 0">
+              <span class="im_dialog_chat_from" my-i18n="conversation_you">Tu</span><!----><span ng-if="dialogMessage.message.length &gt; 0 || !!dialogMessage.media">:</span><!---->
+            </span><!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Ahahaha</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">23/11/18</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/059da558-8176-4e3d-861b-d4a136b3f828"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Telegram <i class="icon-verified"></i></span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Codice di accesso: 53003. Non darlo a nessuno, nemmeno a chi dice di essere Telegram!  Questo codice può essere usato per accede</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">28/10/18</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/fa2d460f-fcfa-4149-a7f2-8ff12d893ad8"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Vasco</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Allora niente, ci organizziamo in un altro modo</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!----><li class="im_dialog_wrap" my-dialog="" dialog-message="dialogMessage" ng-repeat="dialogMessage in dialogs track by dialogMessage.peerID" ng-class="{active: curDialog.peerID == dialogMessage.peerID}"><a class="im_dialog" ng-mousedown="dialogSelect(dialogMessage.peerString, dialogMessage.unreadCount == -1 &amp;&amp; dialogMessage.mid)">
+
+  <div class="im_dialog_meta pull-right text-right">
+    <div class="im_dialog_date" ng-bind="dialogMessage.dateText">27/10/18</div>
+    <span class="im_dialog_badge badge ng-hide" ng-show="dialogMessage.unreadCount &gt; 0 &amp;&amp; !dialogMessage.pFlags.out" ng-bind="dialogMessage.unreadCount" my-peer-muted="dialogMessage.peerID" muted-class="im_dialog_badge_muted">0</span>
+    <i class="im_dialog_unread ng-hide" ng-show="dialogMessage.pFlags.out &amp;&amp; dialogMessage.pFlags.unread"></i>
+    <i class="im_dialog_pinned ng-hide" ng-show="dialogMessage.pinned &amp;&amp; !dialogMessage.unreadCount &amp;&amp; !dialogMessage.pFlags.unread"></i>
+  </div>
+
+  <i class="icon icon-select-tick" ng-class="{dialog_selected: isSelected(dialogMessage.peerString)}" ng-mousedown="dialogMultiSelect(dialogMessage.peerString, $event)"></i>
+  
+  <div class="im_dialog_photo pull-left peer_photo_init" my-peer-photolink="::dialogMessage.peerID" img-class="im_dialog_photo" watch="true" for-dialog="!dialogMessage.foundInHistory"><img class="im_dialog_photo" src="blob:https://web.telegram.org/110fd9b4-60a5-47c4-9e19-d9fbf5a9c21a"></div>
+
+  <div class="im_dialog_message_wrap">
+
+    <div class="im_dialog_peer">
+      <span my-peer-link="dialogMessage.peerID" verified="true" for-dialog="!dialogMessage.foundInHistory">Tritolo</span>
+    </div>
+
+    <div ng-switch="dialogMessage.typing ? &#39;typing&#39; : (!dialogMessage.unreadCount &amp;&amp; dialogMessage.draft ? &#39;draft&#39; : (dialogMessage.deleted ? &#39;deleted&#39; : &#39;message&#39;))">
+
+      <!---->
+
+      <!---->
+
+      <!---->
+
+      <!----><div ng-switch-when="message" class="im_dialog_message" style="">
+        <span ng-switch="dialogMessage.peerID &gt; 0 || dialogMessage.fromID &lt; 0">
+          <!----><span ng-switch-when="true">
+            <!---->
+          </span><!---->
+          <!---->
+        </span>
+
+        <span my-short-message="dialogMessage"><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Ahaha</span><!----></span>
+      </div><!---->
+    </div>
+
+  </div>
+
+</a>
+</li><!---->
+            </ul>
+
+            <div class="im_dialogs_contacts_wrap ng-hide" ng-show="myResults.length &gt; 0">
+              <h5 my-i18n="im_chat_contacts_title">Chat e contatti</h5>
+              <ul class="nav nav-pills nav-stacked">
+                <!---->
+              </ul>
+            </div>
+
+            <div class="im_dialogs_contacts_wrap ng-hide" ng-show="foundPeers.length &gt; 0">
+              <h5 my-i18n="im_found_title">Ricerca globale</h5>
+              <ul class="nav nav-pills nav-stacked">
+                <!---->
+              </ul>
+            </div>
+
+            <div class="im_dialogs_messages_wrap ng-hide" ng-show="foundMessages.length &gt; 0">
+              <h5 my-i18n="im_messages">Messaggi</h5>
+              <ul class="nav nav-pills nav-stacked">
+                <!---->
+              </ul>
+            </div>
+
+          </div>
+        <div class="nano-pane" style="display: block;"><div class="nano-slider" style="height: 461px; transform: translate(0px, 0px);"></div></div></div>
+      </div>
+    </div>
+
+    <div class="im_history_col_wrap noselect im_history_loaded" ng-controller="AppImHistoryController" ng-class="{im_history_loaded: state.loaded}" style="">
+
+      <div class="im_history_not_selected_wrap" ng-switch="isEmpty.contacts &amp;&amp; isEmpty.dialogs">
+        <!---->
+        <!----><div ng-switch-default="" class="im_history_not_selected vertical-aligned" my-vertical-position="0.35" padding="true" my-i18n="im_select_a_chat" style="padding-top: 315px; padding-bottom: 315px;">Seleziona una chat per iniziare a messaggiare</div><!---->
+      </div>
+
+      <div class="im_history_selected_loading_wrap im_history_loading vertical-aligned" my-vertical-position="0.4" padding="true" style="padding-top: 360px; padding-bottom: 360px;">
+        <div my-arc-progress="" stroke="4" width="32" class="progress-arc-wrap progress-arc-intermediate" style="width: 32px; height: 32px;"><svg class="progress-arc" viewport="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32">  <defs>    <lineargradient id="grad_intermediate1" x1="0%" y1="0%" x2="100%" y2="0%">      <stop offset="0%" class="stop0"></stop>      <stop offset="60%" class="stop60"></stop>      <stop offset="100%" class="stop100"></stop>    </lineargradient>  </defs>  <circle class="progress-arc-bar" cx="16" cy="16" r="14" style="stroke-width: 4; stroke-dasharray: 38.7044, 49.2602; stroke: url(&quot;#grad_intermediate1&quot;);"></circle></svg></div>
+      </div>
+
+      <div class="im_history_selected_wrap">
+        <div my-history="" class="im_history_col">
+          <div my-peer-pinned-message-bar="curDialog.peerID" class="im_history_pinned_panel"><!----></div>
+
+          <div class="im_history_wrap nano has-scrollbar active-scrollbar" style="height: 568px;">
+
+            <div class="im_history_scrollable_wrap nano-content" tabindex="-1" style="right: -15px;">
+
+              <div class="im_history_scrollable" style="padding-right: 0px;">
+                  <div class="im_history im_history_selectable" ng-class="{im_history_selectable: !historyState.botActions, im_history_select_active: historyState.selectActions}" style="">
+
+                    <div class="im_history_empty_wrap ng-hide" ng-show="state.empty" ng-switch="state.mayBeHasMore">
+                      <!---->
+                      <!----><div ng-switch-default="" class="im_history_empty vertical-aligned" my-vertical-position="0.25" padding="true" my-i18n="im_no_messages" style="padding-top: 225px; padding-bottom: 225px;">Ancora nessun messaggio qui…</div><!---->
+                    </div>
+
+                    <div class="im_history_messages" ng-class="{im_history_messages_group: historyPeer.id &lt; 0}" style="margin-top: 0px;">
+                      <div class="im_history_loading_more" ng-class="{im_history_loading_more_active: state.moreActive}" style="">
+                        <div my-arc-progress="" stroke="3" width="26" class="progress-arc-wrap progress-arc-intermediate" style="width: 26px; height: 26px;"><svg class="progress-arc" viewport="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" width="26" height="26">  <defs>    <lineargradient id="grad_intermediate2" x1="0%" y1="0%" x2="100%" y2="0%">      <stop offset="0%" class="stop0"></stop>      <stop offset="60%" class="stop60"></stop>      <stop offset="100%" class="stop100"></stop>    </lineargradient>  </defs>  <circle class="progress-arc-bar" cx="13" cy="13" r="11.5" style="stroke-width: 3; stroke-dasharray: 31.7929, 40.4637; stroke: url(&quot;#grad_intermediate2&quot;);"></circle></svg></div>
+                      </div>
+                      <!----><div class="im_history_messages_peer ng-hide" ng-show="peerHistory.peerID == historyPeer.id" ng-repeat="peerHistory in peerHistories" style="">
+                        <!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"><div class="im_message_date_split im_service_message_wrap"><div class="im_service_message"><span class="copyonly"><br>---&nbsp;</span><span class="im_message_date_split_text">venerdì 18 gennaio 2019</span><span class="copyonly">&nbsp;---</span></div></div> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37468">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/3c9613eb-52ef-417a-8aca-d5926886e286"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="16:12:44"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body im_message_body_media" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">16:12:44</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto" style="display: none;"></div>
+          <div class="im_message_media" my-message-media="media" message-id="messageId"><div ng-switch="::media._">
+  <!---->
+  <!----><div ng-switch-when="messageMediaDocument" my-message-document="media" message-id="messageId"><div ng-switch="::media.document.type" data-doc-id="5913693083488224506">
+
+  <!---->
+
+  <!---->
+
+  <!---->
+
+  <!---->
+
+  <!---->
+
+  <!---->
+
+  <!----><div ng-switch-default="" class="im_message_document clearfix im_message_document_thumbed" ng-class="{im_message_document_thumbed: !!media.document.thumb, im_message_document_progress: media.document.progress.enabled}">
+
+    <!---->
+    <!----><a ng-if="::media.document.thumb" ng-click="docOpen()">
+      <div class="im_message_document_thumb_wrap">
+        <img class="im_message_document_thumb" my-load-thumb="" thumb="media.document.thumb" width="86" height="100" src="blob:https://web.telegram.org/f8802116-f474-460c-8a25-bcb4d9d1c558">
+      </div>
+    </a><!---->
+
+    <div class="im_message_document_info">
+      <div class="im_message_document_name_wrap">
+        <a href="https://web.telegram.org/" ng-attr-title="{{media.document.file_name}}" ng-attr-data-name="{{media_file_name_without_ext}}" ng-attr-data-ext="{{media_file_ext}}" ng-click="docOpen()" class="im_message_document_name" title="YAAA.jpg" data-name="YAAA" data-ext=".jpg"></a><span class="copyonly">[<span ng-bind="::media.document.file_name">YAAA.jpg</span>]</span>
+        <!----><span class="im_message_document_size" ng-if="!media.document.progress.enabled" ng-bind="::media.document.size | formatSize">71 KB</span><!---->
+        <!---->
+      </div>
+      <!----><div class="im_message_document_actions" ng-if="!media.document.progress.enabled" ng-switch="media.document.downloaded">
+        <!----><a class="nocopy" ng-switch-when="true" href="https://web.telegram.org/" ng-click="docSave()" my-i18n="message_attach_document_save" data-content="Salva file" style=""></a><!---->
+        <!---->
+        <!----><a class="nocopy" ng-if="::media.document.withPreview" href="https://web.telegram.org/" ng-click="docOpen()" my-i18n="message_attach_document_open" data-content="Apri"></a><!---->
+      </div><!---->
+      <!---->
+    </div>
+
+  </div><!---->
+</div>
+<!---->
+</div><!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->  
+
+  <!---->
+
+  <!---->
+</div></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!---->
+                      </div><!----><div class="im_history_messages_peer" ng-show="peerHistory.peerID == historyPeer.id" ng-repeat="peerHistory in peerHistories" style="">
+                        <!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages" style=""><div class="im_message_date_split im_service_message_wrap"><div class="im_service_message"><span class="copyonly"><br>---&nbsp;</span><span class="im_message_date_split_text">venerdì 18 gennaio 2019</span><span class="copyonly">&nbsp;---</span></div></div> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37446">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/65a63742-c821-406e-9016-5dc22ee62f10"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="15:06:25"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">15:06:25</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">dai i disegnini sono tranquilli</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages" style=""> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37447">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/30ce4c13-e2ef-4ad8-ac8b-91d561fa62aa"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="15:06:32"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">15:06:32</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">era il sito che faceva merda</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37455">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/5aceddb2-7370-4e6d-add3-93d791bf9b3e"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="15:35:08"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">15:35:08</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Tu le tue modifiche le hai fatte tutte giusto?</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37456">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/0bf388df-b900-4f52-9a4a-62e6cb524f28"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid" style="display: inline;">modificato</span>
+          <span class="im_message_date_text nocopy" data-content="15:35:34"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">15:35:34</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Nel senso  le tue cose per il progetto sono tutte apposto?</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37459">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/18abe5a0-635b-43ad-9840-67dee35f011d"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="15:39:22"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">15:39:22</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">sisi</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37460">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/d76f042e-13f5-4291-9391-556177e7ef7b"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="15:39:33"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">15:39:33</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">mi ha solo detto di spostare la data</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37461">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/bad34e9a-af52-462d-905e-2b6915a0920a"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="15:39:37"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">15:39:37</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">e ho spostato la data</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37474">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/8b3435b8-c06a-457a-89e4-da7957166665"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="20:02:09"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">20:02:09</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Ho cucinato il cotechino con il ragù perchè sono le uniche due cosè che ho in casa</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37475">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/9abfefe2-f9a5-4902-b2c1-66a0123aa8b4"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="20:02:14"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">20:02:14</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Quanto sono povero</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped" my-message="" ng-repeat="historyMessage in peerHistory.messages" style=""> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37476">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/eb51d0a5-9175-494a-a61b-627d498a1667"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="20:03:08"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body im_message_body_media" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">20:03:08</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto" style="display: none;"></div>
+          <div class="im_message_media" my-message-media="media" message-id="messageId"><div ng-switch="::media._">
+  <!----><div ng-switch-when="messageMediaPhoto" my-message-photo="media" message-id="messageId"><a class="im_message_photo_thumb" ng-click="openPhoto(media.photo.id, {m: messageId})" ng-style="::{width: media.photo.thumb.width + &#39;px&#39;}" ng-mouseover="preloadPhoto(media.photo.id)" style="width: 146px;">
+  <img class="im_message_photo_thumb" my-load-thumb="" thumb="media.photo.thumb" alt="[Foto]" width="146" height="260" src="blob:https://web.telegram.org/e4b476ea-9805-46d8-9528-f5c70c6b3d38">
+</a>
+<!----><div ng-if="::media.rCaption" class="im_message_photo_caption" ng-bind-html="::media.rCaption">Devo dire che è buono però</div><!----></div><!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->  
+
+  <!---->
+
+  <!---->
+</div></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37477">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/c3d948e3-9512-479c-8fda-8e646a673add"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="20:16:57"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">20:16:57</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Alta cucina</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37478">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/1c9cfa17-442f-4748-8fde-9b0de0a63c9a"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="20:17:09"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">20:17:09</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Io kebab with max and già hot friend</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37479">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/9ee11ce2-72e8-446a-a44a-41190af97646"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="20:25:08"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">20:25:08</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Ggià</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"><div class="im_message_date_split im_service_message_wrap"><div class="im_service_message"><span class="copyonly"><br>---&nbsp;</span><span class="im_message_date_split_text">sabato 19 gennaio 2019</span><span class="copyonly">&nbsp;---</span></div></div> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37600">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/7f10b352-d040-44c2-8610-0ae980c6b0c1"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="17:45:27"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">17:45:27</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Ema ma se stasera ci prendessimo una pizza al volo ci saresti?</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37601">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/fcd6a591-2a9c-41df-8aad-fe9a3ec9b3c2"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="18:08:06"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">18:08:06</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Mangio a casa con altri stase</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37602">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/579307bb-69c2-486c-a0c0-00a887664baa"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="18:08:31"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">18:08:31</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Kay</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37607">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/e1e60358-6323-4869-92f1-4cf449c32293"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:44:26"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:44:26</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">C'è gente più ricca di me nelle graduatorie della borsa di studio</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37608">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/f6b1d4ec-9b87-479c-b3eb-52848fdb078d"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:44:35"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:44:35</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">L'anno prossimo la faccio anche io</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37609">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/171a59c8-b9a7-406b-874c-3e575c0dd4e7"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:44:55"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:44:55</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">si ma non la prendono</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37611">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/f20dfb5c-5964-404e-ae66-6d369bccc5f1"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:45:03"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:45:03</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Ovvio</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages" style=""><div class="im_message_date_split im_service_message_wrap" style="display: none;"><div class="im_service_message"><span class="copyonly"><br>---&nbsp;</span><span class="im_message_date_split_text">sabato 19 gennaio 2019</span><span class="copyonly">&nbsp;---</span></div></div> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37612">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/bb5edba5-9a4a-4a32-a499-dd35337c232a"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:45:07"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:45:07</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Per sport</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37617">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/58d2c47e-8f15-4969-a80c-f1359b9e8f3b"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:52:18"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:52:18</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">si li ho visti anche io</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages" style=""> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37618">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/f52865f7-efcf-4b93-a225-40f627b5ff5e"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:52:23"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:52:23</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">70k di isee</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37619">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/3ed99ebb-d38a-4a16-8470-9b93d26da16d"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:52:41"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:52:41</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">"perchè non chiedere la borsa distudio "</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37620">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/c64efd02-d91f-480f-81e1-9473c6491900"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:52:43"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:52:43</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">pure maddalena l'ha richiesta</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37621">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/aef3a368-4527-4166-ac05-88132ac4a03d"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:52:54"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:52:54</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">con isee, ispe fuori + fuori corso</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37622">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/67c1ebe1-b4c7-4c4d-9f94-cda21ee72b6b"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:53:08"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:53:08</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">"Adesso rompo il sistema"</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37623">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/17e7770a-cc23-457e-b27e-0fe0d41293de"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:53:24"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:53:24</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Ella madonna</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37625">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/44505e6f-e35c-4019-bcd4-250dbfc8b7a8"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:53:44"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:53:44</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Ancora un pò gli chiedevano dei soldi a madda</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37627">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/4585ecef-e449-4413-b8f5-d1457facc18d"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:57:57"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body im_message_body_media" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:57:57</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto" style="display: none;"></div>
+          <div class="im_message_media" my-message-media="media" message-id="messageId"><div ng-switch="::media._">
+  <!----><div ng-switch-when="messageMediaPhoto" my-message-photo="media" message-id="messageId"><a class="im_message_photo_thumb" ng-click="openPhoto(media.photo.id, {m: messageId})" ng-style="::{width: media.photo.thumb.width + &#39;px&#39;}" ng-mouseover="preloadPhoto(media.photo.id)" style="width: 260px;">
+  <img class="im_message_photo_thumb" my-load-thumb="" thumb="media.photo.thumb" alt="[Foto]" width="260" height="19" src="blob:https://web.telegram.org/e436d28e-ac0d-4899-ae94-03a9c356e3e0">
+</a>
+<!----></div><!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->  
+
+  <!---->
+
+  <!---->
+</div></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37628">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/e20e5f31-160f-48b7-aa77-06756ba38c3f"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:58:07"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:58:07</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">questa è maddalena ahahah</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37629">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/47094e26-4b2f-4505-8bf5-03935a7942f8"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:58:48"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:58:48</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Porca troia</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37630">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/19670a7a-d8e8-476b-8e8a-3613c22240a2"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:58:50"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:58:50</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Ciro</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37631">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/4ee5e1d3-086a-494c-912e-afc3fddce01d"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:59:11"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:59:11</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Eh matricola 85</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37632">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/5ddbdf5b-6b84-43bd-a9ca-ad71def0971c"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:59:52"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:59:52</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Lei il sistema lo ha rotto davvero</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37633">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/2f05d9bd-9260-4ad8-9d6e-2bda8a8dcff6"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="21:59:59"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">21:59:59</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Mensa a 3,70</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped" my-message="" ng-repeat="historyMessage in peerHistory.messages" style=""> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37634">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/1f409b3f-825b-4d35-bf1e-a48320774832"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="22:01:56"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">22:01:56</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Comunque sono al secondo pack di slide della rossi del secondo compitino</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37635">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/f2ff85a4-1c16-4052-9360-b5d6b1943571"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="22:02:08"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">22:02:08</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Cariche di materiale</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_grouped_short" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37636">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/e992ffd7-8e12-4f9d-baa7-3f4d0daa5f5d"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="22:02:24"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">22:02:24</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Non so quanta roba possa essere utile</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37639">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_in" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/3b785bbe-d93f-4f7d-9271-05ff84014498"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="22:04:09"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">22:04:09</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">M8</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Poco niente</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap" my-message="" ng-repeat="historyMessage in peerHistory.messages"><div class="im_message_date_split im_service_message_wrap" style="display: none;"><div class="im_service_message"><span class="copyonly"><br>---&nbsp;</span><span class="im_message_date_split_text">sabato 19 gennaio 2019</span><span class="copyonly">&nbsp;---</span></div></div> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="37641">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!---->
+      <!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/115b9d04-c2b6-45f8-bee1-aab52dda0312"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid"></span>
+          <span class="im_message_date_text nocopy" data-content="22:04:35"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">22:04:35</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">BENE le farò passare velocemente</div>
+          <div class="im_message_media" style="display: none;"></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!----><div class="im_history_message_wrap im_message_unread" my-message="" ng-repeat="historyMessage in peerHistory.messages" style=""><div class="im_message_date_split im_service_message_wrap"><div class="im_service_message"><span class="copyonly"><br>---&nbsp;</span><span class="im_message_date_split_text">domenica 20 gennaio 2019</span><span class="copyonly">&nbsp;---</span></div></div> <div class="im_message_outer_wrap hasselect" ng-click="toggleMessage(historyMessage.mid, $event)" data-msg-id="-1">
+
+  <div class="im_message_wrap clearfix" ng-switch="::historyMessage._ == &#39;messageService&#39;">
+
+    <!---->
+
+    <!----><div ng-switch-default="" class="im_content_message_wrap im_message_out" ng-class="::[historyMessage.pFlags.out ? &#39;im_message_out&#39; : &#39;im_message_in&#39;, historyMessage.fwdFromID ? &#39;im_message_fwd&#39; : &#39;&#39;]">
+      <i class="icon icon-select-tick"></i>
+
+      <!----><a class="im_message_error_btn" ng-if="::historyMessage.pending || historyMessage.error || false" ng-click="historyMessage.send()">
+        <i class="icon-message-status" tooltip="Riprova"></i>
+      </a><!---->
+      <!----><i ng-if="::historyMessage.pFlags.unread &amp;&amp; historyMessage.pFlags.out || historyMessage.pending || false" class="icon-message-status" ng-show="!historyMessage.error"></i><!---->
+
+      <a class="im_message_from_photo pull-left peer_photo_init" my-peer-photolink="::historyMessage.fromID" img-class="im_message_from_photo"><img class="im_message_from_photo" src="blob:https://web.telegram.org/a7930238-532e-4ffd-ae51-c19fd4ed5ba7"></a>
+
+      <div class="im_message_meta pull-right text-right noselect">
+        <!---->
+        <span class="im_message_date clickable">
+          <span class="im_message_edited" my-message-edited="historyMessage.mid" style="display: inline;">modificato</span>
+          <span class="im_message_date_text nocopy" data-content="11:17:40"></span>
+        </span>
+      </div>
+
+      <div class="im_message_body" ng-class="::{im_message_body_media: historyMessage._ == &#39;message&#39; &amp;&amp; historyMessage.media ? true : false}">
+
+        <span class="im_message_author_wrap">
+          <span class="copyonly">[<span ng-bind="::historyMessage.date | time">11:17:40</span>] </span><a class="im_message_author" my-peer-link="historyMessage.fromID" short="historyMessage.peerID &gt; 0" color="historyMessage.peerID &lt; 0" no-watch="true" saved-from="historyMessage.savedFrom">Mauro</a><!----><span class="copyonly">:</span><span class="im_message_author_admin" my-message-admin-badge="historyMessage" style="display: none;"></span>
+        </span>
+
+
+        <!---->
+
+        <!---->
+
+        <div my-message-body="historyMessage">
+          <div class="im_message_text" dir="auto">Ciao Ema, per pittarello ci rimangono solo due cose da fare:<br>1) SIstemare un attimino i mockup della technical con Moqups per farla sembrare quanto riesci simile al sito<br>2) Aggiungere le reference dei grafici che abbiamo fatto che trovi da qui ( <a href="https://datavizcatalogue.com/" target="_blank" rel="noopener noreferrer">https://datavizcatalogue.com/</a> ) al documento Latex(solo da aggiungere alla bibliografia nient'altro<br>Riusciresti a farlo tu?</div>
+          <div class="im_message_media" my-message-media="media" message-id="messageId"><div ng-switch="::media._">
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!----><div ng-switch-when="messageMediaWebPage" my-message-webpage="media" message-id="messageId" class="" style=""><div ng-show="media.webpage._ == &#39;webPage&#39;" class="im_message_webpage_wrap clearfix" ng-switch="media.webpage.type">
+  <!---->
+  <!---->
+
+  <!---->
+
+  <!---->
+
+  <!----><div ng-switch-default="" class="im_message_webpage_article">
+    <!---->
+    <!----><div ng-if="media.webpage.site_name" class="im_message_webpage_site" ng-bind="media.webpage.site_name">Datavizcatalogue</div><!---->
+    <div class="im_message_webpage_title">
+      <a ng-click="openEmbed($event)" href="https://datavizcatalogue.com/" target="_blank" ng-bind-html="media.webpage.rTitle">The Data Visualisation Catalogue</a>
+    </div>
+    <!----><div ng-if="media.webpage.description.length" class="im_message_webpage_description" ng-bind-html="media.webpage.rDescription">A handy guide and library of different data visualization techniques, tools, and a learning resource for data visualization.</div><!---->
+  </div><!---->
+</div>
+</div><!---->
+  <!---->
+  <!---->  
+
+  <!---->
+
+  <!---->
+</div></div>
+          <div class="im_message_sign" style="display: none;"></div>
+          <div class="im_message_keyboard" style="display: none;"></div>
+        </div>
+
+
+      </div>
+
+    </div><!---->
+  </div>
+
+</div>
+
+</div><!---->
+                      </div><!---->
+                    </div>
+
+                  </div>
+
+                  <div class="im_history_typing_wrap" ng-switch="historyState.skipped">
+
+                    <!---->
+                    <!----><div ng-switch-default="" class="im_history_typing ng-hide" ng-show="historyState.typing.length &gt; 0 &amp;&amp; !historyFilter.mediaType &amp;&amp; !state.empty" ng-switch="historyState.typing.length" my-i18n="">
+                      <!----><span ng-switch-when="0"></span><!---->
+                      <!---->
+                      <!---->
+                      <!---->
+                      
+                      
+                      
+                      
+                    </div><!---->
+                  </div>
+
+              </div>
+
+            </div>
+
+          <div class="nano-pane" style="display: block;"><div class="nano-slider" style="height: 122px; transform: translate(0px, 436px);"></div></div></div>
+
+          <div class="im_bottom_panel_wrap">
+
+            <div class="im_edit_panel_wrap clearfix ng-hide" ng-show="historyState.actions()" ng-switch="historyState.actions()" ng-class="historyState.channelActions !== false ? &#39;im_edit_small_panel_wrap&#39; : &#39;&#39;" style="">
+              <div class="im_edit_panel_border"></div>
+
+              <!---->
+              <!---->
+              <!---->
+            </div>
+
+            <div class="im_send_panel_wrap noselect" ng-show="!historyState.actions()" style="">
+
+              <div class="im_send_form_wrap1">
+
+                <div class="im_send_form_wrap clearfix im_send_reply_form_wrap" ng-controller="AppImSendController" ng-class="{im_send_reply_form_wrap: draftMessage.replyToMsgID &gt; 0}" style="height: 230px;">
+
+                  <a class="pull-right im_panel_peer_photo peer_photo_init" my-peer-photolink="historyPeer.id" img-class="im_panel_peer_photo" watch="true" for-dialog="true" ng-show="!draftMessage.isBroadcast"><img class="im_panel_peer_photo" src="blob:https://web.telegram.org/42158d48-6fe7-43a5-a49d-30a35471a072">
+                    <i class="icon im_panel_peer_online ng-hide" ng-show="historyPeer.id &gt; 0 &amp;&amp; historyPeer.data.status._ == &#39;userStatusOnline&#39;"></i>
+                  </a>
+                  <a class="pull-left im_panel_own_photo peer_photo_init" my-peer-photolink="draftMessage.isBroadcast ? historyPeer.id : ownID" img-class="im_panel_own_photo" watch="true" ng-click="openSettings()" no-open="true"><img class="im_panel_own_photo" src="blob:https://web.telegram.org/6170b426-4043-45d7-a285-c3ac3a28f154"></a>
+
+                  <div my-send-form="" draft-message="draftMessage" mentions="mentions" commands="commands" reply-keyboard="historyState.replyKeyboard" class="im_record_supported"><form class="im_send_form ng-valid ng-dirty ng-valid-parse" ng-class="{im_send_form_empty: !draftMessage.text.length, composer_progress_enabled: draftMessage.inlineProgress, im_voice_recording: voiceRecorder.recording, im_processing_recording: voiceRecorder.processing}" style="">
+
+  <div class="im_send_form_inline_results" my-inline-results="inlineResults"><!---->
+
+<ul class="inline_results_wrap composer_dropdown">
+  <!---->
+</ul></div>
+
+  <!----><div class="im_send_reply_wrap" ng-if="draftMessage.replyToMsgID &gt; 0" style="">
+    <a class="im_send_reply_cancel" ng-mousedown="draftMessage.replyClear(true)"><i class="icon icon-reply-bar"></i><i class="icon icon-reply-bar"></i></a>
+    <a class="im_message_reply_wrap" my-reply-message="draftMessage.replyToMsgID" watch="true" edit="true"><div class="im_message_reply clearfix" ng-class="{im_message_reply_thumbed: thumb !== false}" ng-switch="replyMessage.loading">
+  <div class="im_message_reply_border"></div>
+  <!---->
+  <!---->
+  <!----><div class="im_message_reply_author" ng-switch-default="" ng-switch="isEdit">
+    <span class="copyonly">&gt;&nbsp;</span>
+    <!----><span ng-switch-when="true" my-i18n="im_edit_message_title">Modifica messaggio</span><!---->
+    <!---->
+  </div><!---->
+  <!----><div class="im_message_reply_body" ng-switch-default="">
+    <span class="copyonly">&gt;&nbsp;</span>
+    <span my-short-message="replyMessage"><!----><span class="im_short_message_media" ng-if="message.media" ng-switch="message.media._">
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+</span><!----><!----><!----><span class="im_short_message_text" ng-if="message.message.length &amp;&amp; (!message.media || message.media._ == &#39;messageMediaWebPage&#39;)" ng-bind-html="message.richMessage">Ciao Ema, per pittarello ci rimangono solo due cose da fare: 1) SIstemare un attimino i mockup della technical con Moqups per fa</span><!----></span>
+  </div><!---->
+</div></a>
+  </div><!---->
+
+  <!---->
+
+  <div class="im_send_field_wrap hasselect" ng-class="replyKeyboard._ == &#39;replyKeyboardMarkup&#39; ? &#39;im_send_field_wrap_2ndbtn&#39; : &#39;&#39;"><div class="im_inline_placeholder_wrap"><span class="im_inline_placeholder_prefix"></span><span class="im_inline_placeholder"></span></div>
+    <a class="composer_emoji_insert_btn"><i class="icon icon-emoji"></i></a>
+    <div class="composer_progress_icon_wrap">
+      <div class="composer_progress_icon progress-arc-wrap progress-arc-intermediate" my-arc-progress="" width="22" stroke="2.5" style="width: 22px; height: 22px;"><svg class="progress-arc" viewport="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22" height="22">  <defs>    <lineargradient id="grad_intermediate3" x1="0%" y1="0%" x2="100%" y2="0%">      <stop offset="0%" class="stop0"></stop>      <stop offset="60%" class="stop60"></stop>      <stop offset="100%" class="stop100"></stop>    </lineargradient>  </defs>  <circle class="progress-arc-bar" cx="11" cy="11" r="9.75" style="stroke-width: 2.5; stroke-dasharray: 26.9549, 34.3062; stroke: url(&quot;#grad_intermediate3&quot;);"></circle></svg></div>
+    </div>
+    <a class="composer_command_btn ng-hide" ng-show="!replyKeyboard &amp;&amp; commands.list.length &gt; 0 &amp;&amp; (!draftMessage.text.length || draftMessage.text == &#39;/&#39;)" ng-mousedown="draftMessage.toggleSlash($event)" ng-class="draftMessage.text[0] == &#39;/&#39; ? &#39;active&#39; : &#39;&#39;"><i class="icon icon-slash"></i></a>
+    <a class="composer_keyboard_btn active ng-hide" ng-show="replyKeyboard._ == &#39;replyKeyboardMarkup&#39;" ng-mousedown="draftMessage.replyKeyboardToggle($event)" ng-class="!replyKeyboard.pFlags.hidden ? &#39;active&#39; : &#39;&#39;"><i class="icon icon-keyboard"></i></a>
+
+    <div class="im_send_dropbox_wrap" my-i18n="im_photos_drop_text">Trascina qui le foto per inviarle</div>
+    <div class="im_voice_recorder_wrap">
+      <div class="im_recorder_indicator"><i></i></div>
+      <div class="im_recorder_time" ng-bind="voiceRecorder.duration | duration">0:00</div>
+      <div class="im_recorder_label" ng-switch="voiceRecorder.processing">
+        <!---->
+        <!----><span ng-switch-default="">
+          <span class="im_recorder_label_hover" my-i18n="im_voice_recording_label">Rilascia fuori da qui per annullare</span>
+          <span class="im_recorder_label_hout" my-i18n="im_voice_recording_cancel_label">Rilascia per annullare la registrazione</span>
+        </span><!---->
+      </div>
+    </div>
+
+    <div class="composer_rich_textarea" contenteditable="true" dir="auto" placeholder="Scrivi un messaggio..." style="left: -15px; width: calc(100% + 30px); padding-left: 17px; padding-right: 43px;">Ciao Ema, per pittarello ci rimangono solo due cose da fare:<br>1) SIstemare un attimino i mockup della technical con Moqups per farla sembrare quanto riesci simile al sito<br>2) Aggiungere le reference dei grafici che abbiamo fatto che trovi da qui ( https://datavizcatalogue.com/ ) al documento Latex(solo da aggiungere alla bibliografia nient'altro)<br>Riusciresti a farlo tu?</div><textarea ng-model="draftMessage.text" class="form-control im_message_field no_outline ng-untouched ng-valid ng-dirty ng-valid-parse ng-not-empty" dir="auto" ng-trim="false" style="display: none;"></textarea>
+  </div>
+
+  <div class="im_send_buttons_wrap clearfix">
+    <button type="submit" class="btn btn-md im_submit im_submit_edit" ng-class="draftMessage.type == &#39;edit&#39; ? &#39;im_submit_edit&#39; : &#39;im_submit_send&#39;" style="">
+      <span class="im_submit_send_label nocopy" my-i18n="im_submit_message" data-content="Invia"></span>
+      <span class="im_submit_edit_label nocopy" my-i18n="im_submit_edit_message" data-content="Salva"></span>
+    </button>
+
+    <div class="im_attach pull-left">
+      <input type="file" class="im_attach_input" size="28" multiple="multiple" title="Invia file">
+      <i class="icon icon-paperclip"></i>
+    </div>
+
+    <div class="im_media_attach pull-left">
+      <input type="file" class="im_media_attach_input" size="28" multiple="multiple" accept="image/*, video/*, audio/*" title="Invia media">
+      <i class="icon icon-camera"></i>
+    </div>
+
+    <a class="im_record pull-left">
+      <div class="im_record_bg">
+        <i class="icon icon-mic"></i>
+      </div>
+    </a>
+
+    <div class="composer_emoji_panel"><a class="composer_emoji_btn" title=":joy:" data-code="1f602"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -440px -0px;"></i></a><a class="composer_emoji_btn" title=":+1:" data-code="1f44d"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -480px -60px;"></i></a><a class="composer_emoji_btn" title=":kissing_heart:" data-code="1f618"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -140px -0px;"></i></a><a class="composer_emoji_btn" title=":heart:" data-code="2764"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -200px -120px;"></i></a><a class="composer_emoji_btn" title=":heart_eyes:" data-code="1f60d"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -120px -0px;"></i></a><a class="composer_emoji_btn" title=":blush:" data-code="1f60a"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -60px -0px;"></i></a><a class="composer_emoji_btn" title=":grin:" data-code="1f601"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -300px -0px;"></i></a><a class="composer_emoji_btn" title=":relaxed:" data-code="263a"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -80px -0px;"></i></a><a class="composer_emoji_btn" title=":pensive:" data-code="1f614"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -320px -0px;"></i></a><a class="composer_emoji_btn" title=":smile:" data-code="1f604"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -0px -0px;"></i></a><a class="composer_emoji_btn" title=":sob:" data-code="1f62d"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -460px -0px;"></i></a><a class="composer_emoji_btn" title=":kiss:" data-code="1f48b"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -380px -120px;"></i></a><a class="composer_emoji_btn" title=":unamused:" data-code="1f612"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -360px -0px;"></i></a><a class="composer_emoji_btn" title=":flushed:" data-code="1f633"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -280px -0px;"></i></a><a class="composer_emoji_btn" title=":stuck_out_tongue_winking_eye:" data-code="1f61c"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -220px -0px;"></i></a><a class="composer_emoji_btn" title=":see_no_evil:" data-code="1f648"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -60px -60px;"></i></a><a class="composer_emoji_btn" title=":wink:" data-code="1f609"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -100px -0px;"></i></a><a class="composer_emoji_btn" title=":smiley:" data-code="1f603"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -20px -0px;"></i></a><a class="composer_emoji_btn" title=":cry:" data-code="1f622"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -420px -0px;"></i></a><a class="composer_emoji_btn" title=":stuck_out_tongue_closed_eyes:" data-code="1f61d"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -240px -0px;"></i></a><a class="composer_emoji_btn" title=":scream:" data-code="1f631"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -100px -20px;"></i></a><a class="composer_emoji_btn" title=":rage:" data-code="1f621"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -140px -20px;"></i></a><a class="composer_emoji_btn" title=":smirk:" data-code="1f60f"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -40px -40px;"></i></a><a class="composer_emoji_btn" title=":disappointed:" data-code="1f61e"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -380px -0px;"></i></a><a class="composer_emoji_btn" title=":sweat_smile:" data-code="1f605"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -0px -20px;"></i></a><a class="composer_emoji_btn" title=":kissing_closed_eyes:" data-code="1f61a"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -160px -0px;"></i></a><a class="composer_emoji_btn" title=":speak_no_evil:" data-code="1f64a"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -100px -60px;"></i></a><a class="composer_emoji_btn" title=":relieved:" data-code="1f60c"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -340px -0px;"></i></a><a class="composer_emoji_btn" title=":grinning:" data-code="1f600"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -40px -0px;"></i></a><a class="composer_emoji_btn" title=":yum:" data-code="1f60b"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -220px -20px;"></i></a><a class="composer_emoji_btn" title=":laughing:" data-code="1f606"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -200px -20px;"></i></a><a class="composer_emoji_btn" title=":ok_hand:" data-code="1f44c"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -520px -60px;"></i></a><a class="composer_emoji_btn" title=":neutral_face:" data-code="1f610"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -480px -20px;"></i></a><a class="composer_emoji_btn" title=":confused:" data-code="1f615"><i class="emoji emoji-w20 emoji-spritesheet-0" style="background-position: -500px -20px;"></i></a></div>
+  </div>
+
+  <!---->
+
+</form></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer_wrap footer_empty"></div>
+
+<div id="toast-container" ng-class="[config.position, config.animation]" toaster-options="{&#39;position-class&#39;: &#39;toast-bottom-center&#39;}" class="toast-bottom-center"><!----></div>
+</div><div id="notify_sound"></div><script src="./Telegram Web_files/app.js"></script><script src="./Telegram Web_files/angular-locale_it-it.js"></script><div id="nacl_listener"><embed id="mtproto_crypto" width="0" height="0" src="nacl/mtproto_crypto.nmf" type="application/x-pnacl"></div><div class="composer_dropdown_wrap" style="display: none;"><div class="scroller_scrollable_container" style="height: 0px;"><div class="scroller_scrollable_wrap nano has-scrollbar"><div class="scroller_scrollable nano-content " tabindex="-1" style="right: -15px;"><div><div my-composer-dropdown=""><div ng-switch="type">
+
+  <!---->
+
+  <!---->
+
+  <!---->
+
+  <!---->
+
+</div></div></div></div><div class="nano-pane" style="display: none;"><div class="nano-slider" style="height: 20px; transform: translate(0px, 0px);"></div></div></div></div></div></body></html>
